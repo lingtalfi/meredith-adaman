@@ -13,6 +13,8 @@ Hello
 In this tutorial, I give you a technique I use to create a basic crud system 
 using the [datatables plugin](http://datatables.net/) for jquery.
 
+This technique uses the [Meredith plugin](https://github.com/lingtalfi/Meredith) 1.0.0.
+
 
 We will create an application with 3 simple pages:
 
