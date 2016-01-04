@@ -117,6 +117,7 @@ The structure
 
 The structure for [*]/app is the following
  
+``` 
 .
 ├── functions
 │   └── az.php
@@ -170,7 +171,8 @@ The structure for [*]/app is the following
                 ├── delete_rows.php
                 ├── fetch_row.php
                 └── insert_update_row.php
- 
+                
+```
  
 
 What you need to change?
@@ -271,6 +273,9 @@ We can see that there is a lot of objects that are bound together.
 I don't want to go into the details now (open the source code if you are interested),
 but we basically have four areas to update:
 
+
+#### Area 1 
+
 Around line 24, where is says:
 
 ```php
@@ -292,6 +297,9 @@ AuthorListHandler::create()
 
 Basically, these lines control the jquery datatables plugin.
 
+
+#### Area 2
+
 Now in the next couple of lines, we have the line that says:
 
 ```php
@@ -302,6 +310,9 @@ It turns out that we have an active column too in our products table, so we can 
 it will transform the default active value (probably 0 or 1) to a more fancy red-green button.
 Comment it to see the difference.
 
+
+
+#### Area 3
 
 Now the datatables can display correctly.
 Let's continue to edit our (main configuration) file.
@@ -324,6 +335,8 @@ BootstrapControlsRenderer::create()
                             ->addControl(MonoStatusControl::create()->setName("active")->setLabel("Active"))
 ```
 
+
+#### Area 4
 
 At this point, the form might be displayed correctly, however, the processing of the form 
 is not yet configured (i.e., if we post the form we will have weird error messages).
