@@ -1,0 +1,7 @@
+.datatable-meredith .dropdown,
+.datatable-meredith.dropup {
+    /**
+    * Remove the bullet in the actions drop down (on the right)
+    */
+    list-style: outside none none;
+}
