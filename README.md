@@ -27,6 +27,7 @@ It looks like this (no need to say design was not my priority):
 ![meredith adaman home](http://s19.postimg.org/952kgx8f7/meredith_adaman_home.png)
 ![meredith adaman form](http://s19.postimg.org/xx26o5plv/meredith_adaman_form.png)
 ![meredith adaman list](http://s19.postimg.org/bno9hlu5f/meredith_adaman_list.png)
+![meredith adaman ajax-form](http://s19.postimg.org/r31j9bso3/meredith_adaman_ajax_form.png)
 
 
 
@@ -45,6 +46,8 @@ The application created with this tutorial has the following features:
 - use the pagination, sorting and searching systems from datatables 
 - use the server side processing strategy from datatables 
 - demonstrates the customization of specific columns rendering (active is turned into a red/green button rather than a 0/1 number)  
+- highlighting of the "just updated" row  
+- updating a row displaying changes immediately  
 
 
 
@@ -276,10 +279,11 @@ but we basically have four areas to update:
 
 #### Area 1 
 
-Around line 24, where is says:
+Around line 31, where is says:
 
 ```php
-AuthorListHandler::create()
+BaseListHandler::create()
+            // ...
             ->addColumn('id')
             // ...
 ```
@@ -287,7 +291,8 @@ AuthorListHandler::create()
 Put your own columns:
 
 ```php
-AuthorListHandler::create()
+BaseListHandler::create()
+            // ...
             ->addColumn('id')
             ->addColumn('the_name')
             ->addColumn('active')
@@ -319,7 +324,7 @@ Let's continue to edit our (main configuration) file.
 
 What we want now is point to http://adaman/products-form and have the relevant form displayed.
 
-Find the area around line 36 where it says:
+Find the area around line 45 where it says:
 
 ```php
 BootstrapControlsRenderer::create()
@@ -342,7 +347,7 @@ At this point, the form might be displayed correctly, however, the processing of
 is not yet configured (i.e., if we post the form we will have weird error messages).
 
 So, let's continue the configuration.
-The last area to modify is around line 47, where is says:
+The last area to modify is around line 59, where is says:
 
 ```php
 FormDataProcessor::create()
@@ -404,14 +409,55 @@ the password confirm field.
 
  
 
+FAQ
+=========
+2016-01-05
+
 
     
     
     
+How do I initialize default values for an insert form?
+------------------------------------------------------------
+     
+     
+Open [app]/pages/meredith/main-controllers/$formId.php,
+     and search for the line around 46:
+     
+```php     
+->addControl(InputControl::create()->setName("email")->setLabel("Email")->setType("email")->setPlaceHolder("Enter a valid email address"))
+```     
+
+The InputControl object has a setValue method that you can use, for instance:
+
+```php     
+->addControl(InputControl::create()->setValue("This is the default value fr insert form")->setName("email")->setLabel("Email")->setType("email")->setPlaceHolder("Enter a valid email address"))
+```     
+
+
+
+
+
+
+
+
+
+
+
+History Log
+------------------
     
+- 1.1.0 -- 2016-01-04
 
+    - updated tutorial for Meredith version 2.0.0
+    
+    
+    
+- 1.0.0 -- 2016-01-04
 
-
+    - initial commit
+    
+    
 
 
 

@@ -10,7 +10,10 @@ use Meredith\FormRenderer\AuthorFormRenderer;
 use Meredith\FormRenderer\ControlsRenderer\BootstrapControlsRenderer;
 use Meredith\FormRenderer\ControlsRenderer\Control\InputControl;
 use Meredith\FormRenderer\ControlsRenderer\Control\MonoStatusControl;
-use Meredith\ListHandler\AuthorListHandler;
+use Meredith\ListButtonCode\ColvisListButtonCode;
+use Meredith\ListButtonCode\DeleteSelectedRowsListButtonCode;
+use Meredith\ListHandler\BaseListHandler;
+use Meredith\ListPreConfigScript\AuthorListPreConfigScript;
 use Meredith\MainController\AuthorMainController;
 use Meredith\OnModalOpenAfter\OnModalOpenAfter;
 use Meredith\Supervisor\MeredithSupervisor;
@@ -20,7 +23,11 @@ use Meredith\ValidatorJsUserCode\ValidatorJsUserCode;
 
 $mainController = AuthorMainController::create()
     ->setFormId(MeredithSupervisor::inst()->getFormId())
-    ->setListHandler(AuthorListHandler::create()
+    ->setListHandler(BaseListHandler::create()
+            ->setPreConfigScript(AuthorListPreConfigScript::create()
+                    ->addHeaderButton(ColvisListButtonCode::create())
+                    ->addHeaderButton(DeleteSelectedRowsListButtonCode::create())
+            )
             ->addColumn('id')
             ->addColumn('email')
             ->addColumn('pass')
