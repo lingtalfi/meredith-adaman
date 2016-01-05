@@ -447,7 +447,7 @@ The InputControl object has a setValue method that you can use, for instance:
 History Log
 ------------------
     
-- 1.1.0 -- 2016-01-04
+- 1.1.0 -- 2016-01-05
 
     - updated tutorial for Meredith version 2.0.0
     
