@@ -39,15 +39,17 @@ The application created with this tutorial has the following features:
 
 - CRUD: create, update, read (display the list), delete 
 - js validation is handled
-- every single bit is customizable
+- every single bit is customizable, including internationalization
 - contextual menu on each row to update/delete
 - can hide/show the columns of the table by default (feature from datatables)
+- has various built in form controls: input, textarea, select, switchery
 - can delete multiple rows at once
 - use the pagination, sorting and searching systems from datatables 
 - use the server side processing strategy from datatables 
 - demonstrates the customization of specific columns rendering (active is turned into a red/green button rather than a 0/1 number)  
 - highlighting of the "just updated" row  
 - updating a row displaying changes immediately  
+- handles foreign keys for insert/update operations (since 1.2.0)  
 
 
 
@@ -417,7 +419,7 @@ FAQ
     
     
     
-How do I initialize default values for an insert form?
+Insert form: How do I initialize default values?
 ------------------------------------------------------------
      
      
@@ -436,6 +438,50 @@ The InputControl object has a setValue method that you can use, for instance:
 
 
 
+    
+    
+    
+List: How do I change a column name?
+------------------------------------------------------------
+
+Open [app]/pages/meredith/main-controllers/$formId.php, and around line 31, 
+replace: 
+
+```
+->addColumn('id')
+```
+
+With:
+
+```
+->addColumn('id', true, "#")
+```
+
+
+
+    
+List: How do I handle foreign keys for displaying?
+------------------------------------------------------------
+
+The problem, you have a two tables: users and pets, and a pet belongs to one user.
+When you display the pets table, the users_id column shows ugly numbers, but you want to customize 
+the column (for instance you want the users_id column content to be something like "1. Michelle" instead of just "1").
+
+
+In Meredith's lingo, this is called a cosmetic change.
+Open [app]/pages/meredith/main-controllers/$formId.php, and around line 31, and after the addColumn() calls,
+add the following
+
+```php
+// ...
+->setMainAlias("p")
+->setFrom("pets p inner join users u on u.id=p.users_id")
+->addCosmeticChange("users_id", 'concat( p.users_id, ". ", u.the_name ) as users_id')
+// ...
+```
+
+
+
 
 
 
@@ -446,6 +492,11 @@ The InputControl object has a setValue method that you can use, for instance:
 
 History Log
 ------------------
+    
+- 1.2.0 -- 2016-01-05
+
+    - updated tutorial for Meredith version 2.1.0
+    
     
 - 1.1.0 -- 2016-01-05
 
