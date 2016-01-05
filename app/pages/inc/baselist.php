@@ -99,3 +99,4 @@ use Meredith\MainController\MainControllerInterface;
 
 
 <?php require_once __DIR__ . "/../meredith/list-init.php"; ?>
+<?php echo $mc->getListHandler()->getPreConfigScript()->render($mc); ?>
