@@ -50,6 +50,7 @@ The application created with this tutorial has the following features:
 - highlighting of the "just updated" row  
 - updating a row displaying changes immediately  
 - handles foreign keys for insert/update operations (since 1.2.0)  
+- handles cosmetic changes (customization of the foreign key representation in the list)  
 
 
 
@@ -482,6 +483,33 @@ add the following
 
 
 
+List: I want to customize the where clause, how do I do that?
+------------------------------------------------------------------------
+
+A common case when you need to customize the where clause is when an item of the database belongs to a connected user.
+Then in the where clause of a (for instance) product item, you want to only display the products that belongs to the connected user.
+
+
+In order to do that, open [app]/pages/meredith/main-controllers/$formId.php, and use the setWhere method
+of the ListHandler object. Around line 36, below this line for instance:
+
+```php
+->addColumn('actions', false)
+```
+
+add the following 
+
+```php
+->setWhere("email like '%ling%'")
+```
+
+
+
+
+
+
+
+
 
 
 
@@ -492,6 +520,11 @@ add the following
 
 History Log
 ------------------
+    
+- 1.3.0 -- 2016-01-05
+
+    - updated tutorial for Meredith version 2.2.0
+    
     
 - 1.2.0 -- 2016-01-05
 
