@@ -521,6 +521,11 @@ add the following
 History Log
 ------------------
     
+- 1.3.1 -- 2016-01-15
+
+    - updated tutorial for Meredith version 2.3.0
+    
+    
 - 1.3.0 -- 2016-01-05
 
     - updated tutorial for Meredith version 2.2.0
